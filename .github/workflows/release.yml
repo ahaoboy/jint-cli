@@ -9,6 +9,9 @@ defaults:
   run:
     shell: bash --noprofile --norc -CeEuo pipefail {0}
 
+env:
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+
 jobs:
   build:
     strategy:
@@ -29,16 +32,19 @@ jobs:
 
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.0.x'
+          dotnet-version: "9.0.x"
       - name: build
         run: |
           dotnet --version
+
+          dotnet dev-certs https --trust
+
           dotnet build -c Release --self-contained true
 
           mkdir dist
 
-          cp ./bin/Release/net9.0/jint ./dist/
-          tar -czf ./jint-${TARGET}.tar.gz -C dist .
+          cp ./bin/Release/net9.0/jint-cli ./dist/
+          tar -czf ./jint-${{ matrix.target }}.tar.gz -C dist .
 
       - name: Upload
         uses: actions/upload-artifact@v4
