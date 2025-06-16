@@ -53,8 +53,8 @@ jobs:
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
-          name: jint-${{ matrix.target }}
-          path: ./jint-${{ matrix.target }}.tar.gz
+          name: jint-cli-${{ matrix.target }}
+          path: ./jint-cli-${{ matrix.target }}.tar.gz
 
   release:
     needs: build
@@ -64,13 +64,13 @@ jobs:
       - name: Download All Artifacts
         uses: actions/download-artifact@v4
         with:
-          path: jint
-          pattern: jint*
+          path: jint-cli
+          pattern: jint-cli*
           merge-multiple: true
 
       - name: release
         if: startsWith(github.ref, 'refs/tags/')
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "jint/*.tar.gz"
+          artifacts: "jint-cli/*.tar.gz"
           allowUpdates: true
