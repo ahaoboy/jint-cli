@@ -53,7 +53,7 @@ jobs:
 
           mkdir dist
 
-          cp ./bin/Release/net9.0/linux-x64/publish/jint-cli ./dist
+          cp ./bin/Release/net9.0/${{ matrix.rid }}/publish/jint-cli ./dist
 
           # cp ./bin/Release/net9.0/jint-cli.dll ./dist/jint-cli.dll
           tar -czf ./jint-cli-${{ matrix.target }}.tar.gz -C dist .
