@@ -48,6 +48,7 @@ jobs:
           mkdir dist
 
           cp ./bin/Release/net9.0/jint-cli ./dist
+          cp ./bin/Release/net9.0/jint-cli.dll ./dist/jint-cli.dll
           tar -czf ./jint-cli-${{ matrix.target }}.tar.gz -C dist .
 
       - name: Upload
