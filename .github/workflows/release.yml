@@ -47,8 +47,8 @@ jobs:
 
           mkdir dist
 
-          cp ./bin/Release/net9.0/jint-cli ./dist/
-          tar -czf ./jint-${{ matrix.target }}.tar.gz -C dist .
+          cp ./bin/Release/net9.0/jint-cli ./dist
+          tar -czf ./jint-cli-${{ matrix.target }}.tar.gz -C dist .
 
       - name: Upload
         uses: actions/upload-artifact@v4
