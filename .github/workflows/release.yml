@@ -19,12 +19,16 @@ jobs:
       matrix:
         include:
           - target: x86_64-apple-darwin
+            rid: "osx-x64"
             os: macos-13
           - target: aarch64-apple-darwin
+            rid: "osx-arm64"
             os: macos-14
           - target: x86_64-pc-windows-gnu
+            rid: "win-x64"
             os: windows-latest
           - target: x86_64-unknown-linux-gnu
+            rid: linux-x64
             os: ubuntu-24.04
     runs-on: ${{ matrix.os }}
     steps:
@@ -42,13 +46,16 @@ jobs:
           # dotnet dev-certs https --check -q
 
           # dotnet build -c Release --self-contained true
+          # dotnet publish -c Release --self-contained true
 
-          dotnet build -c Release
+          # dotnet build -c Release
+          dotnet publish -c Release --self-contained true
 
           mkdir dist
 
-          cp ./bin/Release/net9.0/jint-cli ./dist
-          cp ./bin/Release/net9.0/jint-cli.dll ./dist/jint-cli.dll
+          cp ./bin/Release/net9.0/linux-x64/publish/jint-cli ./dist
+
+          # cp ./bin/Release/net9.0/jint-cli.dll ./dist/jint-cli.dll
           tar -czf ./jint-cli-${{ matrix.target }}.tar.gz -C dist .
 
       - name: Upload
