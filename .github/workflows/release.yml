@@ -39,7 +39,9 @@ jobs:
 
           dotnet dev-certs https --trust
 
-          dotnet build -c Release --self-contained true
+          # dotnet build -c Release --self-contained true
+
+          dotnet build -c Release
 
           mkdir dist
 
