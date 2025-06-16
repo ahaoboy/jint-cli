@@ -37,9 +37,9 @@ jobs:
         run: |
           dotnet --version
 
-          dotnet dev-certs https --clean
-          dotnet dev-certs https --trust
-          dotnet dev-certs https --check
+          # dotnet dev-certs https --clean -q
+          # dotnet dev-certs https --trust -q
+          # dotnet dev-certs https --check -q
 
           # dotnet build -c Release --self-contained true
 
